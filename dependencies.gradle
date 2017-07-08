@@ -1,0 +1,36 @@
+ext {
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.2'
+    minSdkVersion = 16
+    targetSdkVersion = 25
+    junitVersion = '4.12'
+    leakcanaryVersion = '1.5.1'
+    supportVersion = '25.2.0'
+    gsonVersion = '2.8.0'
+    eventbusVersion = '3.0.0'
+    rxjavaVersion = '2.1.0'
+    rxandroidVersion = '2.0.1'
+    glideVersion = "3.7.0"
+    retrofitVersion = "2.1.0"
+
+
+    deps = [
+            appcompatv7        : "com.android.support:appcompat-v7:$supportVersion",
+            supportDesign      : "com.android.support:design:$supportVersion",
+            butterknife        : "com.jakewharton:butterknife:$butterknifeVersion",
+            butterknifeCompiler: "com.jakewharton:butterknife-compiler:$butterknifeVersion",
+            gson               : "com.google.code.gson:gson:$gsonVersion",
+//            eventbus           : "org.greenrobot:eventbus:$eventbusVersion",
+//            bugly              : "com.tencent.bugly:crashreport:latest.release",
+            junit              : "junit:junit:$junitVersion",
+//            leakcanary         : "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion",
+//            leakcanaryNoOP     : "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanaryVersion",
+            rxjava             : "io.reactivex.rxjava2:rxjava:$rxjavaVersion",
+            rxandroid          : "io.reactivex.rxjava2:rxandroid:$rxandroidVersion",
+            glide              : "com.github.bumptech.glide:glide:$glideVersion",
+            // 以下三个依赖版本号必须一致
+            retrofit           : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            converterGson      : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            adapterRxjava      : "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    ]
+}
