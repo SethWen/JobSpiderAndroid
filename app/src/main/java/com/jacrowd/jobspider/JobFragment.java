@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jacrowd.jobspider.adapter.SubPagerAdapter;
-import com.jacrowd.jobspider.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,17 +39,25 @@ public class JobFragment extends BaseFragment {
     @Override
     protected void initData() {
         Bundle args = getArguments();
-        String type = args.getString("type");
-        LogUtil.d(TAG, type);
+        int jobType = args.getInt("JOB_TYPE");
 
         FragmentManager fragmentManager = getChildFragmentManager();
-
-        SubFragment pythonFragment = SubFragment.newInstance("Python");
-        SubFragment androidFragment = SubFragment.newInstance("Android");
-
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(pythonFragment);
-        fragments.add(androidFragment);
+
+        if (jobType == 1) {
+            // 创建拉钩对应的 Fragment
+            LagouFragment lagouPythonFragment = LagouFragment.newInstance(1);
+            LagouFragment lagouAndroidFragment = LagouFragment.newInstance(2);
+            fragments.add(lagouPythonFragment);
+            fragments.add(lagouAndroidFragment);
+        } else {
+            // 创建智联对应的 Fragment
+            ZhilianFragment zhilianPythonFragment = ZhilianFragment.newInstance(1);
+            ZhilianFragment zhilianAndroidFragment = ZhilianFragment.newInstance(2);
+            fragments.add(zhilianPythonFragment);
+            fragments.add(zhilianAndroidFragment);
+        }
+
 
         List<String> titles = Arrays.asList("Python", "Android");
 
@@ -59,9 +66,15 @@ public class JobFragment extends BaseFragment {
         tab.setupWithViewPager(vpContainer);
     }
 
-    public static JobFragment newInstance(String type) {
+    /**
+     * 创建不同类型的 JobFragment
+     *
+     * @param jobType 1：拉钩; 2:智联
+     * @return
+     */
+    public static JobFragment newInstance(int jobType) {
         Bundle args = new Bundle();
-        args.putString("type", type);
+        args.putInt("JOB_TYPE", jobType);
         JobFragment fragment = new JobFragment();
         fragment.setArguments(args);
         return fragment;

@@ -26,30 +26,6 @@ public class MainActivity extends BaseActivity {
     private FragmentManager fragmentManager;
     private JobPagerAdapter adapter;
 
-//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-//
-//        @Override
-//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            switch (item.getItemId()) {
-//                case R.id.navigation_home:
-//                    vpContainer.setCurrentItem(0);
-//                    LogUtil.d(TAG, "-----0");
-//                    return true;
-//                case R.id.navigation_dashboard:
-//                    vpContainer.setCurrentItem(1);
-//                    LogUtil.d(TAG, "-----1");
-//                    return true;
-//                case R.id.navigation_notifications:
-//                    vpContainer.setCurrentItem(2);
-//                    LogUtil.d(TAG, "-----2");
-//                    return true;
-//            }
-//            return false;
-//        }
-//
-//    };
-
     @Override
     protected int getContentView() {
         return R.layout.activity_main;
@@ -60,11 +36,10 @@ public class MainActivity extends BaseActivity {
         super.initViews();
         fragmentManager = getSupportFragmentManager();
 
-        JobFragment zhilianFragment = JobFragment.newInstance("智联");
-        JobFragment lagouFragment = JobFragment.newInstance("拉钩");
-        JobFragment meFragment = JobFragment.newInstance("我的");
+        JobFragment zhilianFragment = JobFragment.newInstance(1);
+        JobFragment lagouFragment = JobFragment.newInstance(2);
+        MeFragment meFragment = MeFragment.newInstance();
 
-//        List<JobFragment> fragments = Arrays.asList(zhilianFragment, lagouFragment, meFragment);
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(zhilianFragment);
         fragments.add(lagouFragment);
