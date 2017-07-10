@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.jacrowd.jobspider.adapter.JobPagerAdapter;
 import com.jacrowd.jobspider.util.LogUtil;
@@ -22,9 +25,10 @@ public class MainActivity extends BaseActivity {
     BottomNavigationView navigation;
     @BindView(R.id.vp_container)
     NoScrollViewPager vpContainer;
-
-    private FragmentManager fragmentManager;
-    private JobPagerAdapter adapter;
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     @Override
     protected int getContentView() {
@@ -34,7 +38,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
-        fragmentManager = getSupportFragmentManager();
+        ivBack.setVisibility(View.GONE);
+        tvTitle.setText("JobSpider");
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
         JobFragment zhilianFragment = JobFragment.newInstance(1);
         JobFragment lagouFragment = JobFragment.newInstance(2);
@@ -47,7 +53,7 @@ public class MainActivity extends BaseActivity {
 
         LogUtil.d(TAG, fragments.size() + "");
 
-        adapter = new JobPagerAdapter(fragmentManager, fragments);
+        JobPagerAdapter adapter = new JobPagerAdapter(fragmentManager, fragments);
         vpContainer.setAdapter(adapter);
 
     }

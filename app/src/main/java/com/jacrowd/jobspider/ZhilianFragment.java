@@ -1,16 +1,17 @@
 package com.jacrowd.jobspider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jacrowd.jobspider.adapter.LagouAdapter;
-import com.jacrowd.jobspider.retroservice.LagouResponse;
+import com.jacrowd.jobspider.adapter.ZhilianAdapter;
+import com.jacrowd.jobspider.retroservice.ZhilianResponse;
+import com.jacrowd.jobspider.util.LogUtil;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -24,6 +25,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+
 /**
  * author: Shawn
  * time  : 2017/7/9 00:47
@@ -33,8 +35,8 @@ public class ZhilianFragment extends BaseFragment {
     @BindView(R.id.xrv_job)
     XRecyclerView xrvJob;
 
-    private ArrayList<LagouResponse.DataEntity> datas;
-    private LagouAdapter adapter;
+    private ArrayList<ZhilianResponse.DataEntity> datas;
+    private ZhilianAdapter adapter;
     private int offset = 0;
     private int positionType;
 
@@ -64,17 +66,24 @@ public class ZhilianFragment extends BaseFragment {
         xrvJob.setArrowImageView(R.drawable.iconfont_downgrey);
 
         datas = new ArrayList<>();
-        adapter = new LagouAdapter(positionType, datas);
+        adapter = new ZhilianAdapter(positionType, datas);
         xrvJob.setAdapter(adapter);
-        xrvJob.refresh();
     }
 
     @Override
     protected void initListener() {
         super.initListener();
+        adapter.setOnItemClickListener(position -> {
+            LogUtil.i(TAG, "initListener: " + position);
+            Intent intent = new Intent(mActivity, WebActivity.class);
+            intent.putExtra("DETAIL_URL", datas.get(position).getDetailHref());
+            startActivity(intent);
+        });
+
         xrvJob.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                LogUtil.e(TAG, "onRefresh: ---------------");
                 offset = 0;
                 getData(offset);
             }
@@ -85,16 +94,16 @@ public class ZhilianFragment extends BaseFragment {
                 App.jobRetrofit.getJobService().getZhilianJobs(positionType, offset)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Observer<LagouResponse>() {
+                        .subscribe(new Observer<ZhilianResponse>() {
                             @Override
                             public void onSubscribe(@NonNull Disposable d) {
-                                Log.d(TAG, "onSubscribe: ");
+                                LogUtil.d(TAG, "onSubscribe: ");
                             }
 
                             @Override
-                            public void onNext(@NonNull LagouResponse response) {
-                                Log.d(TAG, response.getCode() + "");
-                                List<LagouResponse.DataEntity> nextDatas = response.getData();
+                            public void onNext(@NonNull ZhilianResponse response) {
+                                LogUtil.d(TAG, response.getCode() + "");
+                                List<ZhilianResponse.DataEntity> nextDatas = response.getData();
                                 datas.addAll(response.getData());
                                 if (nextDatas.size() == 10) {
                                     xrvJob.loadMoreComplete();
@@ -105,31 +114,33 @@ public class ZhilianFragment extends BaseFragment {
 
                             @Override
                             public void onError(@NonNull Throwable e) {
-                                Log.d(TAG, "onError: ");
+                                LogUtil.d(TAG, "onError: ");
                             }
 
                             @Override
                             public void onComplete() {
-                                Log.d(TAG, "onComplete: ");
+                                LogUtil.d(TAG, "onComplete: ");
                             }
                         });
             }
         });
+
+        xrvJob.refresh();
     }
 
     private void getData(int offset) {
         App.jobRetrofit.getJobService().getZhilianJobs(positionType, offset)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<LagouResponse>() {
+                .subscribe(new Observer<ZhilianResponse>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        Log.d(TAG, "onSubscribe: ");
+                        LogUtil.d(TAG, "onSubscribe: ");
                     }
 
                     @Override
-                    public void onNext(@NonNull LagouResponse response) {
-                        Log.d(TAG, response.getCode() + "");
+                    public void onNext(@NonNull ZhilianResponse response) {
+                        LogUtil.d(TAG, response.getCode() + "");
                         adapter.clearAll();
                         adapter.addAll(response.getData());
                         xrvJob.refreshComplete();
@@ -137,12 +148,12 @@ public class ZhilianFragment extends BaseFragment {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d(TAG, "onError: ");
+                        LogUtil.d(TAG, "onError: ");
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.d(TAG, "onComplete: ");
+                        LogUtil.d(TAG, "onComplete: ");
                     }
                 });
     }

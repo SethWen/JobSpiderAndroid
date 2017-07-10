@@ -1,16 +1,17 @@
 package com.jacrowd.jobspider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jacrowd.jobspider.adapter.LagouAdapter;
 import com.jacrowd.jobspider.retroservice.LagouResponse;
+import com.jacrowd.jobspider.util.LogUtil;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -67,15 +68,22 @@ public class LagouFragment extends BaseFragment {
         datas = new ArrayList<>();
         adapter = new LagouAdapter(positionType, datas);
         xrvJob.setAdapter(adapter);
-        xrvJob.refresh();
     }
 
     @Override
     protected void initListener() {
         super.initListener();
+        adapter.setOnItemClickListener(position -> {
+            LogUtil.i(TAG, "initListener: " + position);
+            Intent intent = new Intent(mActivity, WebActivity.class);
+            intent.putExtra("DETAIL_URL", "http://www.lagou.com/");
+            startActivity(intent);
+        });
+
         xrvJob.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                LogUtil.i(TAG, "onRefresh: ---------------");
                 offset = 0;
                 getData(offset);
             }
@@ -89,12 +97,12 @@ public class LagouFragment extends BaseFragment {
                         .subscribe(new Observer<LagouResponse>() {
                             @Override
                             public void onSubscribe(@NonNull Disposable d) {
-                                Log.d(TAG, "onSubscribe: ");
+                                LogUtil.d(TAG, "onSubscribe: ");
                             }
 
                             @Override
                             public void onNext(@NonNull LagouResponse response) {
-                                Log.d(TAG, response.getCode() + "");
+                                LogUtil.d(TAG, response.getCode() + "");
                                 List<LagouResponse.DataEntity> nextDatas = response.getData();
                                 datas.addAll(response.getData());
                                 if (nextDatas.size() == 10) {
@@ -106,16 +114,18 @@ public class LagouFragment extends BaseFragment {
 
                             @Override
                             public void onError(@NonNull Throwable e) {
-                                Log.d(TAG, "onError: ");
+                                LogUtil.d(TAG, "onError: ");
                             }
 
                             @Override
                             public void onComplete() {
-                                Log.d(TAG, "onComplete: ");
+                                LogUtil.d(TAG, "onComplete: ");
                             }
                         });
             }
         });
+
+        xrvJob.refresh();
     }
 
     private void getData(int offset) {
@@ -125,12 +135,12 @@ public class LagouFragment extends BaseFragment {
                 .subscribe(new Observer<LagouResponse>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        Log.d(TAG, "onSubscribe: ");
+                        LogUtil.d(TAG, "onSubscribe: ");
                     }
 
                     @Override
                     public void onNext(@NonNull LagouResponse response) {
-                        Log.d(TAG, response.getCode() + "");
+                        LogUtil.d(TAG, response.getCode() + "");
                         adapter.clearAll();
                         adapter.addAll(response.getData());
                         xrvJob.refreshComplete();
@@ -138,12 +148,12 @@ public class LagouFragment extends BaseFragment {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d(TAG, "onError: ");
+                        LogUtil.d(TAG, "onError: ");
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.d(TAG, "onComplete: ");
+                        LogUtil.d(TAG, "onComplete: ");
                     }
                 });
     }

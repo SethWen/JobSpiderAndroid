@@ -16,7 +16,7 @@ public interface JobService {
      * @param type   1:Python; 2:Android
      * @param offset 页码偏移量
      */
-    @GET("jobs/lagou")
+    @GET("jobs/get_lagou")
 //    Observable<String> getLagouJobs(@Query("type") String type, @Query("offset") int offset);
     Observable<LagouResponse> getLagouJobs(@Query("type") int type, @Query("offset") int offset);
 
@@ -27,6 +27,6 @@ public interface JobService {
      * @param type   1:Python; 2:Android
      * @param offset 页码偏移量
      */
-    @GET("jobs/zhilian")
-    Observable<LagouResponse> getZhilianJobs(@Query("type") int type, @Query("offset") int offset);
+    @GET("jobs/get_zhilian")
+    Observable<ZhilianResponse> getZhilianJobs(@Query("type") int type, @Query("offset") int offset);
 }

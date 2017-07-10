@@ -2,7 +2,7 @@ package com.jacrowd.jobspider;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 
 import butterknife.ButterKnife;
 
@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
  * time  : 2017/7/8 19:26
  * desc  :
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends FragmentActivity {
 
     protected String TAG;
 

@@ -10,11 +10,11 @@ import android.util.Log;
  */
 public class LogUtil {
 
-    private static final String DEFAULT_TAG = "▉▉▉";
+    private static final String DEFAULT_TAG = "JobSpider";
     /**
      * isDebug = false 时不打印 Log
      */
-    private static boolean isDebug = true;
+    private static boolean isDebug = false;
 
     public static void d(String tag) {
         if (isDebug) {

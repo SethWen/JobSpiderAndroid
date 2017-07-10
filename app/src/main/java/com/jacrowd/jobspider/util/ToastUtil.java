@@ -16,7 +16,7 @@ public class ToastUtil {
     private static Toast toast;
 
     /**
-     * 强大的吐司，能够连续弹的长吐司
+     * 连弹长吐司
      *
      * @param text
      */
@@ -30,7 +30,7 @@ public class ToastUtil {
     }
 
     /**
-     * 强大的吐司，能够连续弹的短吐司
+     * 连弹短吐司
      *
      * @param text
      */
@@ -44,7 +44,7 @@ public class ToastUtil {
     }
 
     /**
-     * 强大的吐司，能够连续弹的长吐司
+     * 连弹长吐司
      *
      * @param resID 字符串资源ID
      */
@@ -58,7 +58,7 @@ public class ToastUtil {
     }
 
     /**
-     * 强大的吐司，能够连续弹的短吐司
+     * 连弹短吐司
      *
      * @param resID 字符串资源ID
      */

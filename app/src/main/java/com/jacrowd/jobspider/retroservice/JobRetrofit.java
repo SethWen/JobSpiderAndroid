@@ -10,12 +10,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * desc  :
  */
 public class JobRetrofit {
-    public static String LAGOU_HOST = "http://www.lagou.com";
+    public static String LAGOU_HOST = "http://www.lagou.com/";
     private JobService jobService;
 
     public JobRetrofit() {
 
-        String baseUrl = "http://192.168.1.104:8000/";
+        String baseUrl = "http://23.106.146.99:8000/";
 
         // 初始化 Retrofit
         Retrofit retrofit = new Retrofit.Builder()

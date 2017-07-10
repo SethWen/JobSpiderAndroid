@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#33666666"
+              android:background="@color/colorBg"
               android:orientation="vertical">
 
     <RelativeLayout
@@ -10,44 +12,59 @@
         android:layout_height="160dp"
         android:background="#FFF">
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/com_logo"/>
+            app:srcCompat="@drawable/ic_android_black_24dp"/>
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_github"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
-        android:background="#FFF">
+        android:background="@drawable/selector_me"
+        android:clickable="true">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:background="#FFF"
             android:gravity="center_vertical"
             android:text="Github"
-            android:textSize="20sp"/>
+            android:textSize="18sp"/>
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_version"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
-        android:background="#FFF">
+        android:background="@drawable/selector_me"
+        android:clickable="true">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:background="#FFF"
             android:gravity="center_vertical"
             android:text="Version"
-            android:textSize="20sp"/>
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:textSize="16sp"
+            tools:text="V0.8"/>
+
     </RelativeLayout>
 
 

@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context="com.jacrowd.jobspider.MainActivity">
 
+    <include layout="@layout/include_titlebar"/>
 
     <com.jacrowd.jobspider.widget.NoScrollViewPager
         android:id="@+id/vp_container"
