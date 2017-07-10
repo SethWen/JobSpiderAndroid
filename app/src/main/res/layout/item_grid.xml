@@ -25,6 +25,8 @@
         android:layout_below="@id/iv_com_logo"
         android:layout_marginTop="10dp"
         android:gravity="center"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:textSize="18sp"
         tools:text="Python 高级工程师 [20k-30k]"/>
 
@@ -37,6 +39,8 @@
         android:ellipsize="end"
         android:gravity="center"
         android:lines="1"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:textSize="16sp"
         tools:text="google 公司"/>
 

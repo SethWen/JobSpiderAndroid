@@ -76,7 +76,7 @@ public class LagouFragment extends BaseFragment {
         adapter.setOnItemClickListener(position -> {
             LogUtil.i(TAG, "initListener: " + position);
             Intent intent = new Intent(mActivity, WebActivity.class);
-            intent.putExtra("DETAIL_URL", "http://www.lagou.com/");
+            intent.putExtra("DETAIL_URL", String.format("http://www.lagou.com/jobs/%s.html", datas.get(position).getPositionId()));
             startActivity(intent);
         });
 

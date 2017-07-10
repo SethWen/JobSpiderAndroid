@@ -46,7 +46,7 @@ public class LagouAdapter extends RecyclerView.Adapter<LagouAdapter.ViewHolder> 
         viewHolder.rlContainer.setOnClickListener(v -> mOnItemClickListener.onClick(position));
 
         Glide.with(App.appContext)
-                .load(JobRetrofit.LAGOU_HOST + "i/image/M00/1A/19/CgpEMlj9c0-Ad5QOAAAhIx74qu428.jpeg")
+                .load(JobRetrofit.LAGOU_HOST + datas.get(position).getCompanyLogo())
                 .error(R.drawable.com_logo)
                 .into(viewHolder.ivComLogo);
     }
